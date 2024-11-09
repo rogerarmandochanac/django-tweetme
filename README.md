@@ -1,2 +1,2 @@
 # django-tweetme
-Un clon de tweetme con djanfo
+Un clon de tweetme con django

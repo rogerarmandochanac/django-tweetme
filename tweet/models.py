@@ -1,9 +1,11 @@
 from django.db import models
+from django.config import settings
 
 class Tweet(models.Model):
-    description = models.CharField(max_length=30)
-    create_att = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    user = models.Foreingkey(settings.AUTH_USER_MODEL, default=1)
+    content = models.CharField(max_length=140)
+    timestamp = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.description[0:10]
+        return str(self.content)[0:15]

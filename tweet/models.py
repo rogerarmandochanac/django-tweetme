@@ -1,8 +1,8 @@
 from django.db import models
-from django.config import settings
+from django.conf import settings
 
 class Tweet(models.Model):
-    user = models.Foreingkey(settings.AUTH_USER_MODEL, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     content = models.CharField(max_length=140)
     timestamp = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)

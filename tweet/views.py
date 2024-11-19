@@ -1,12 +1,22 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, CreateView
 from .models import Tweet
+from .forms import TweetModelForm
 
 
 # Create your views here.
 def home(request):
     return render(request, 'index.html', {})
 
+class TweetCreateView(CreateView):
+    form_class = TweetModelForm
+    template_name = 'tweet/create_view.html'
+    success_url = reverse_lazy("tweet_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class TweetDetailView(DetailView):
     queryset = Tweet.objects.all()

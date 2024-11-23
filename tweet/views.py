@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
@@ -9,14 +10,18 @@ from .forms import TweetModelForm
 def home(request):
     return render(request, 'index.html', {})
 
-class TweetCreateView(CreateView):
+class TweetCreateView(LoginRequiredMixin, CreateView):
     form_class = TweetModelForm
     template_name = 'tweet/create_view.html'
     success_url = reverse_lazy("tweet_list")
+    login_url = "/admin"
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        if self.request.user.is_authenticated:
+            form.instance.user = self.request.user
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 class TweetDetailView(DetailView):
     queryset = Tweet.objects.all()

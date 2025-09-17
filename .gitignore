@@ -1,0 +1,5 @@
+*.env
+*.db
+tweetme/media/
+tweetme/staticfiles/
+tweetme/settings_local/

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block container %}
+    <div class="row">
+        <div class="col">
+            {% include 'tweet_create_form.html' with btn_name='tweet'%}
+        </div>
+    </div>    
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+    <h1 class="text-center mt-3">TweetMe</h1>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-6">
+            {% include 'tweet_lookup_form.html' %}
+            {% include 'tweet_create_form.html'  with btn_name='tweet' action_url="tweet" %}
+            {% for tweet in object_list %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2 m-auto">
+                                <img src="{% static 'user/avatar.png' %}" alt="Imagen Usuario" width="50px" class="text-center">
+                            </div>
+                            <div class="col-8">
+                                <h3 class="">{{tweet.user}}</h3>
+                                <a href="{% url 'tweet_update' tweet.id %}" class="d-block">{{tweet.content}}</a>
+                                <small>{{tweet.timestamp}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -28,3 +28,18 @@
         </div>
     </div>
 {% endblock %}
+{% block scripts %}
+    <script>
+        $.ajax({
+            url:'/api/tweet/',
+            method:'GET',
+            success:(data)=>{
+                console.log(data)
+            },
+            error:(e)=>{
+                console.error(e)
+            }
+
+        })
+    </script>
+{% endblock %}

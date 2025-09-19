@@ -3,3 +3,4 @@ env/
 tweetme/media/
 tweetme/staticfiles/
 tweetme/settings_local/
+frontend/node_modules
